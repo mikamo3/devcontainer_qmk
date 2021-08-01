@@ -1,0 +1,28 @@
+{
+  "name": "qmk_firmware",
+  "dockerFile": "Dockerfile",
+  "build": {
+  "args": {
+   // "TAG":"0.13.28"
+  }
+  },
+  "extensions": [
+    "xaver.clang-format",
+    "ms-vscode.cpptools",
+  ],
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "ash": {
+        "path": "bash",
+        "args": ["-l"]
+      },
+    },
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "workspaceFolder": "/qmk_firmware",
+  "mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.gitconfig,target=/home/root/.gitconfig,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/keyboards,target=/qmk_firmware/keyboards,type=bind"
+  ],
+  "remoteUser": "vscode"
+}
