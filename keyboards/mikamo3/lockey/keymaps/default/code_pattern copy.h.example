@@ -1,0 +1,36 @@
+
+#define PUSH_PATTERN_NUM 2
+#define PUSH_COUNT 1
+#define ROTALLY_PATTERN_NUM 1
+#define ROTALLY_COUNT 3
+
+#define PUSH_CODE_0 "hogefuga"
+#define PUSH_CODE_1 "foobar"
+
+#define ROTALLY_CODE_0 "0000"
+enum custom_keycodes {
+    MY_0 = SAFE_RANGE,
+    MY_1,
+    MY_2,
+    MY_3,
+    MY_4,
+    MY_5,
+    MY_6,
+    MY_7,
+    MY_8,
+    MY_9,
+    MY_A,
+    MY_B,
+};
+const uint16_t PUSH_PATTERN[PUSH_PATTERN_NUM][5] = {
+    { MY_1},
+    { MY_2}
+};
+
+struct dial_pattern {
+    bool    clockwise;
+    uint8_t count;
+};
+struct dial_pattern ROTALLY_PATTERN[ROTALLY_PATTERN_NUM][3] = {
+    {{true, 1}, {false, 2}, {true, 3}}
+};

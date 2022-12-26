@@ -16,11 +16,10 @@
 #include QMK_KEYBOARD_H
 #include <string.h>
 #ifdef AUDIO_ENABLE
-  #include "audio.h"
+#    include "audio.h"
 #endif
 #include "quantum_keycodes.h"
 #include "code_pattern.h"
-#include "sendstring_jis.h"
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -36,9 +35,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #define MARIO S__NOTE(_C5), S__NOTE(_G4), S__NOTE(_C5), S__NOTE(_E5), S__NOTE(_G5), S__NOTE(_C6), S__NOTE(_G5), S__NOTE(_GS4), S__NOTE(_C5), S__NOTE(_DS5), S__NOTE(_GS5), S__NOTE(_DS5), S__NOTE(_GS5), S__NOTE(_C6), S__NOTE(_DS6), S__NOTE(_GS6), S__NOTE(_DS6), S__NOTE(_AS4), S__NOTE(_D5), S__NOTE(_F5), S__NOTE(_AS5), S__NOTE(_D6), S__NOTE(_F6), S__NOTE(_AS6), S__NOTE(_F6)
 
-
-uint16_t input_push_pattern[PUSH_COUNT] = {0};
-struct dial_pattern input_rotally_pattern[3] = {0};
+uint16_t            input_push_pattern[PUSH_COUNT] = {0};
+struct dial_pattern input_rotally_pattern[3]       = {0};
 
 uint8_t rotally_pos    = 0;
 uint8_t rotally_cnt    = 0;
@@ -90,7 +88,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         }
                         // match
                         if (j == ROTALLY_COUNT - 1) {
-
                             rgblight_sethsv_noeeprom_green();
                             switch (i) {
                                 case 0:
@@ -132,7 +129,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
                             // match
                             if (j == PUSH_COUNT - 1) {
-
 #ifdef AUDIO_ENABLE
                                 PLAY_SONG(tone_plover_gb);
 #endif
@@ -174,7 +170,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     }
                     // wrong
 
-                                rgblight_sethsv_noeeprom(HSV_BLACK);
+                    rgblight_sethsv_noeeprom(HSV_BLACK);
                     reset_push_state();
                     return true;
                 } else {
@@ -188,7 +184,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     uint8_t led_pos;
     uint8_t led_color;
     if (rotally_pos == ROTALLY_COUNT || rotally_cnt == 0xff) {
@@ -206,24 +202,18 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     rotally_cnt++;
     if (clockwise) {
         led_pos = (rotally_cnt - 1) % RGBLED_NUM;
-
     } else {
         led_pos = (RGBLED_NUM - 1) - (rotally_cnt - 1) % RGBLED_NUM;
     }
     led_color = (rotally_cnt - 1) / RGBLED_NUM % 3;
     switch (led_color) {
         case 0:
-
             rgblight_sethsv_at(HSV_RED, led_pos);
             break;
-
         case 1:
-
             rgblight_sethsv_at(HSV_GREEN, led_pos);
             break;
-
         case 2:
-
             rgblight_sethsv_at(HSV_BLUE, led_pos);
             break;
         default:
