@@ -2,9 +2,9 @@
   "name": "qmk_firmware",
   "dockerFile": "Dockerfile",
   "build": {
-  "args": {
-   // "TAG":"0.13.28"
-  }
+    "args": {
+      "TAG": "0.13.28"
+    }
   },
   "extensions": [
     "xaver.clang-format",
@@ -14,7 +14,9 @@
     "terminal.integrated.profiles.linux": {
       "ash": {
         "path": "bash",
-        "args": ["-l"]
+        "args": [
+          "-l"
+        ]
       },
     },
     "terminal.integrated.defaultProfile.linux": "bash"
