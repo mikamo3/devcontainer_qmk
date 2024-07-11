@@ -3,7 +3,7 @@
   "dockerFile": "Dockerfile",
   "build": {
     "args": {
-      "TAG": "0.13.28"
+      "TAG": "0.22.2"
     }
   },
   "extensions": [
